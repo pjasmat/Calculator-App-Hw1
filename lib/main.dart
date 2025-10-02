@@ -41,3 +41,53 @@ String _op = '';
 bool _justEvaluated = false;
 
 bool get _isEnteringFirst => _op.isEmpty;
+
+@override
+Widget build(BuildContext context) {
+  final opStyle = TextStyle(
+    fontSize: 14,
+    color: Theme.of(context).colorScheme.primary,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.5,
+  );
+
+  return Scaffold(
+    appBar: AppBar(title: const Text('CalculatorApp'), centerTitle: true),
+    body: SafeArea(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: Colors.black.withOpacity(0.04),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    '${_first.isEmpty ? '' : _first} ${_op.isEmpty ? '' : _op} ${_second.isEmpty ? '' : _second}',
+                    style: opStyle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    _display,
+                    style: const TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+                    textAlign: TextAlign.right,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Expanded(child: SizedBox.shrink()),
+          ],
+        ),
+      ),
+    ),
+  );
+}
