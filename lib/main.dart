@@ -91,3 +91,24 @@ Widget build(BuildContext context) {
     ),
   );
 }
+Widget _buildButton(String label, {VoidCallback? onTap, double flex = 1}) {
+  return Expanded(
+    flex: flex.toInt(),
+    child: Padding(
+      padding: const EdgeInsets.all(6.0),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: onTap,
+        child: Container(
+          height: 64,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: Colors.indigo.withOpacity(0.08),
+          ),
+          alignment: Alignment.center,
+          child: Text(label, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600)),
+        ),
+      ),
+    ),
+  );
+}
