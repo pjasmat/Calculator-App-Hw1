@@ -34,3 +34,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     );
   }
 }
+String _display = '0';
+String _first = '';
+String _second = '';
+String _op = '';
+bool _justEvaluated = false;
+
+bool get _isEnteringFirst => _op.isEmpty;
