@@ -213,6 +213,34 @@ void _evaluateInternal() {
     return;
   }
 
+  void _clearAll() {
+  _display = '0';
+  _first = '';
+  _second = '';
+  _op = '';
+  _justEvaluated = false;
+}
+
+void _onClear() {
+  setState(_clearAll);
+}
+
+void _onBackspace() {
+  setState(() {
+    if (_justEvaluated) return;
+    if (_isEnteringFirst) {
+      if (_first.isEmpty) return;
+      _first = _first.substring(0, _first.length - 1);
+      _display = _first.isEmpty ? '0' : _first;
+    } else {
+      if (_second.isEmpty) return;
+      _second = _second.substring(0, _second.length - 1);
+      _display = _second.isEmpty ? '0' : _second;
+    }
+  });
+}
+
+
   double? result;
   switch (_op) {
     case '+': result = a + b; break;
