@@ -10,19 +10,27 @@ class CalculatorApp extends StatelessWidget {
     return MaterialApp(
       title: 'CalculatorApp',
       debugShowCheckedModeBanner: false,
-      home: const PlaceholderHome(),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.indigo,
+      ),
+      home: const CalculatorScreen(),
     );
   }
 }
 
-class PlaceholderHome extends StatelessWidget {
-  const PlaceholderHome({super.key});
+class CalculatorScreen extends StatefulWidget {
+  const CalculatorScreen({super.key});
+  @override
+  State<CalculatorScreen> createState() => _CalculatorScreenState();
+}
 
+class _CalculatorScreenState extends State<CalculatorScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Hello, Calculator!')),
+    return Scaffold(
+      appBar: AppBar(title: const Text('CalculatorApp'), centerTitle: true),
+      body: const Center(child: Text('')),
     );
   }
 }
-
