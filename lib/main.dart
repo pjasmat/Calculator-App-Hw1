@@ -169,6 +169,36 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     });
   }
 
+
+void _evaluateInternal() {
+  if (_first.isEmpty || _op.isEmpty || _second.isEmpty) return;
+
+  final a = double.tryParse(_first);
+  final b = double.tryParse(_second);
+  if (a == null || b == null) {
+    _display = 'Error';
+    return;
+  }
+
+  double? result;
+  switch (_op) {
+    case '+': result = a + b; break;
+    case '-': result = a - b; break;
+    case '×': result = a * b; break;
+    case '÷':
+      if (b == 0) { _display = 'Error'; return; }
+      result = a / b;
+      break;
+  }
+
+  if (result != null) {
+    final text = result.toString();
+    _display = text.endsWith('.0') ? text.substring(0, text.length - 2) : text;
+  } else {
+    _display = 'Error';
+  }
+}
+
   bool _evaluate() {
     final left = double.tryParse(_first.isEmpty ? '0' : _first);
     final right = double.tryParse(_second.isEmpty ? '0' : _second);
