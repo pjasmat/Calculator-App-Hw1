@@ -170,6 +170,39 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
 
+void _onOperator(String operatorSymbol) {
+  setState(() {
+    if (_justEvaluated) {
+      _justEvaluated = false;
+      _op = operatorSymbol;
+      _second = '';
+      return;
+    }
+    if (_first.isEmpty) {
+      _first = _display == '0' ? '' : _display;
+    }
+    if (_first.isNotEmpty && _op.isNotEmpty && _second.isNotEmpty) {
+      _evaluateInternal();
+      _first = _display;
+      _second = '';
+      _op = operatorSymbol;
+      _justEvaluated = false;
+    } else {
+      _op = operatorSymbol;
+    }
+  });
+}
+
+void _onEquals() {
+  setState(() {
+    _evaluateInternal();
+    _justEvaluated = true;
+    _first = _display == 'Error' ? '' : _display;
+    _second = '';
+    _op = '';
+  });
+}
+
 void _evaluateInternal() {
   if (_first.isEmpty || _op.isEmpty || _second.isEmpty) return;
 
